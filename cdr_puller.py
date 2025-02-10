@@ -70,6 +70,11 @@ class MyData(object):
         if self.record[self.RECORD_TIME]:
             start_index = 1
             start_time = self.record[self.RECORD_TIME]
+            if (datetime.utcnow() - datetime.fromisoformat(start_time.replace("Z",""))) > timedelta(days=2):
+                print("last report time more than 2 days ago, changing to 48 hours")
+                print("last report time: ", start_time)
+                start_time = (datetime.utcnow() - timedelta(seconds=172740)).isoformat()[:-3]+"Z"
+                #172740 is 60 seconds shy of 2 days
         else:
             start_time = (datetime.utcnow() - timedelta(seconds=86400)).isoformat()[:-3]+"Z"
         cdrs = []

@@ -1,6 +1,8 @@
 # CDR Download
 
-Download CDRs from your org as local .csv files
+Download CDRs from your org as local .csv files, or send SMS for "missed" calls.
+
+* *missed* calls are defined by small call duration, local hangup, because remote voicemail shows as call answered in CDR.
 <!--[![Vidcast Overview](https://github.com/wxsd-sales/custom-pmr-pin/assets/19175490/4861e7cd-7478-49cf-bada-223b30810691)](https://app.vidcast.io/share/3f264756-563a-4294-82f7-193643932fb3)-->
 
 
@@ -12,6 +14,11 @@ Download CDRs from your org as local .csv files
 - Developed on Python 3.8.1 & 3.8.3
 -   Other OS and Python versions may work but have not been tested
 
+### Webex Connect:
+If you want to send SMS for missed calls, you will need to import the ```webex-connect-simple-sms.workflow``` into a Webex Connect tenant flow.  If you do not have a Webex Connect environment, you can spin up a sandbox [here](https://cpaas.webex.com/products/webex-connect/sandbox).  
+Please note, you will need to have an SMS enabled number in your Webex Connect tenant to send outbound SMS.   
+1. You will need to edit the flow to ensure your JSON is being parsed by the Webhook (first) node.
+2. You will need to edit the SMS (second) node to select the number from which you want to send the SMS.
 
 ### Installation Steps:
 
@@ -26,9 +33,29 @@ Download CDRs from your org as local .csv files
         or manually install each requirement:  
         ```pip install python-dotenv```  
         ```pip install requests```  
-6. Populate the ```CLIENT_ID```, ```CLIENT_SECRET``` and ```REFRESH_TOKEN``` with Service App values between the double quotes of each respective line in the file ```example.env```  
-7. Rename the file ```example.env``` to ```.env```
-   
+6. Populate the ```CLIENT_ID```, ```CLIENT_SECRET``` and ```REFRESH_TOKEN``` with Service App values between the double quotes of each respective line in the file ```example.env```
+7. Change ```BUSINESS_NAME``` to reflect the name of your business. This will appear in the SMS sent to remote end users who miss calls.
+8. Populate the ```WEBEX_CONNECT_URL``` with the inbound webhook url setup in your WebexConnect workflow.
+9. Rename the file ```example.env``` to ```.env```
+
+
+
+
+### Run:
+You can use either of the files to launch the application:
+```
+python cdr_puller_run_forever.py
+```
+or
+```
+python cdr_puller_run_once.py
+```
+Before you launch the script, please open the desired file and make sure the keyword parameters passed to the ```get_cdrs()``` function match your objective.  
+For example, if you want to send SMS, but not write CSV:
+```
+data.get_cdrs(write_csv=False, send_missed_sms=True)
+```
+
 
 ## License
 

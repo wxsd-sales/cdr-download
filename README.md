@@ -14,6 +14,11 @@ Download CDRs from your org as local .csv files, or send SMS for "missed" calls.
 - Developed on Python 3.8.1 & 3.8.3
 -   Other OS and Python versions may work but have not been tested
 
+### Webex Connect:
+If you want to send SMS for missed calls, you will need to import the ```webex-connect-simple-sms.workflow``` into a Webex Connect tenant flow.  If you do not have a Webex Connect environment, you can spin up a sandbox [here](https://cpaas.webex.com/products/webex-connect/sandbox).  
+Please note, you will need to have an SMS enabled number in your Webex Connect tenant to send outbound SMS.   
+1. You will need to edit the flow to ensure your JSON is being parsed by the Webhook (first) node.
+2. You will need to edit the SMS (second) node to select the number from which you want to send the SMS.
 
 ### Installation Steps:
 
@@ -34,7 +39,9 @@ Download CDRs from your org as local .csv files, or send SMS for "missed" calls.
 9. Rename the file ```example.env``` to ```.env```
 
 
-### Run
+
+
+### Run:
 You can use either of the files to launch the application:
 ```
 python cdr_puller_run_forever.py

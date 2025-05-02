@@ -5,7 +5,7 @@ Download CDRs from your org as local .csv files, or send SMS for "missed" calls.
 * *missed* calls are defined by small call duration, local hangup, because remote voicemail shows as call answered in CDR.
 
 ## Demo
-[![Vidcast Overview]()](https://app.vidcast.io/share/baa4c286-5d87-4fc7-b945-d6d2ac7bd3d3)
+[![Vidcast Overview](https://github.com/user-attachments/assets/22255ed7-5c94-4365-9055-1dc044d1eff0)](https://app.vidcast.io/share/baa4c286-5d87-4fc7-b945-d6d2ac7bd3d3)
 
 
 ## Setup
